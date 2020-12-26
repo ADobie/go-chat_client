@@ -86,12 +86,12 @@ export default {
   methods: {
     onRegister: function () {
       this.axios.post(
-        "http://localhost:4444/register",
+        "http://localhost:4444/api/register",
         JSON.stringify(this.inputForm)
-      ).then(function(response) {
+      ).then((response) =>{
         window.console.log(response);
           const RegisterResult = response.data;
-          if (RegisterResult.code === 200) {
+          if (RegisterResult.code === "200") {
           this.$message({
             message: '注册成功',
             type: 'success',
@@ -99,7 +99,7 @@ export default {
               this.$router.replace({ path: '/login' })
             }
           })
-        } else if (RegisterResult.code === 400) {
+        } else if (RegisterResult.code === "400") {
           this.$message.error('用户名不合法')
         }
       })

@@ -78,23 +78,26 @@
         methods: {
             onLogin: function () {
                 this.axios.post(
-                    'http://127.0.0.1:4444/login',
+                    'http://127.0.0.1:4444/api/login',
                     JSON.stringify(this.inputForm)
                 ).then((response) => {
-                    console.log(response);
-                    console.log(typeof response.headers);
+                    console.log(response.data.token);
+                    //console.log(typeof response.headers);
                     const LogResult = response.data;
+                    //console.log(response.data.code);
                     // TODO:  莫名奇妙的原因导致response.header.get is not a function
                     // 使用new Header(xxx) 解决
-                    if (LogResult.code === 200) {
+                    if (LogResult.code === "200") {
                         this.$message({
-                            message: '登陆成功',
+                            message: '登录成功',
                             type: 'success',
                             onClose: () => {
-                                this.$router.replace({ path: '/' })
+                                localStorage.setItem("token",response.data.token);
+                                this.$router.replace({ path: '/chatroom' })
                             }
                         })
-                    } else if (LogResult.code === 400) {
+
+                    } else if (LogResult.code === "400") {
                         this.$message.error('用户名或密码错误')
                     }
                 })

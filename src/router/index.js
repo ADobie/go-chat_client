@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import register from '@/components/register'
 import login from '@/components/login'
 import home from '@/components/home'
+import chatroom from '@/components/chatroom'
 Vue.use(Router);
 
 export default new Router({
@@ -21,8 +22,12 @@ export default new Router({
       path: '/',
       name: 'home',
       component: home
-
-    }
+    },
+    {
+      path: '/chatroom',
+      name: 'chatroom',
+      component: chatroom
+    },
 
 
   ]
